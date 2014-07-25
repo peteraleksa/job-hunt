@@ -16,7 +16,7 @@ class NewVisitorTest(unittest.TestCase):
 		self.assertIn('Job Hunt', self.browser.title)
 
 		# open up the settings page
-		self.assertIn('Settings', self.browser.title)
+		# self.assertIn('Settings', self.browser.title)
 
 		self.fail('Finish the test!')
 
