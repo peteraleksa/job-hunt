@@ -12,6 +12,7 @@ class JobhuntItem(Item):
     pass
 
 class CLJobPostItem(Item):
+    #postId = Field()
     title = Field()
     posted = Field()
     keywords = Field()

@@ -9,7 +9,17 @@
 SPIDER_MODULES = ['jobhunt.spiders']
 NEWSPIDER_MODULE = 'jobhunt.spiders'
 
-FEED_FORMAT = 'json'
+DOWNLOAD_DELAY = 2
+CONCURRENT_REQUESTS_PER_DOMAIN = 4
+
+MONGODB_URI = 'mongodb://localhost:27017'
+MONGODB_DATABASE = 'jobHunt'
+MONGODB_COLLECTION = 'jobPosts'
+#MONGODB_UNIQUE_KEY = 'postId'
+
+ITEM_PIPELINES = [
+	'scrapy_mongodb.MongoDBPipeline'
+]
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'jobhunt (+http://www.yourdomain.com)'

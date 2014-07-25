@@ -119,7 +119,7 @@ class CraigslistSpider(Spider):
 			tokenized_text.extend(nltk.word_tokenize(p))
 
 		item['tokenized_text'] = tokenized_text
-		item['keywords'] = getKeywords(tokenized_text, 4)
+		#item['keywords'] = getKeywords(tokenized_text, 4)
 # end move to pipeline
-		
+		sleep(2)
 		yield item
