@@ -32,17 +32,17 @@ class CraigslistSpider(Spider):
 		
 		# ToDo: move these into a settings file for dynamic generation
 		base_domain = 'http://newyork.craigslist.org'
-		skills = ['java', 'c#', 'android', 'php']
-		strike = ['senior', 'lead', 'principal', 'unpaid']
+		#skills = ['java', 'c#', 'android', 'php']
+		#strike = ['senior', 'lead', 'principal', 'unpaid']
 
 		selector = Selector(response=response)
 
 		links = [] 
 
-		with open('posts.json', 'r') as infile:                                                                     
-			for line in infile:                                                             
-				json_data = json.loads(line)
-				links.append(json_data['original_post_link'])
+		#with open('posts.json', 'r') as infile:                                                                     
+		#	for line in infile:                                                             
+		#		json_data = json.loads(line)
+		#		links.append(json_data['original_post_link'])
 
 		count = 0
 		
@@ -57,28 +57,25 @@ class CraigslistSpider(Spider):
 			item = CLJobLinkItem()
 			item['text'] = sel.xpath('span/span[2]/a/text()').extract()
 			
-			# move filtering to item pipeline
+# move filtering to django db query
+#			words = set(w.lower() for w in item['text'][0].split())
+#			suitable = False
+#			for word in words:
+#				if word in skills and word not in strike:
+#					suitable = True
+#			if suitable:
+# end move filtering to django db query
 
-			words = set(w.lower() for w in item['text'][0].split())
-
-			print words
-
-			suitable = False
-
-			for word in words:
-				if word in skills and word not in strike:
-					suitable = True
-
-			if suitable:
-				count += 1
-				item['link'] = link
-				yield Request(link, callback=self.post_parse)
+			count += 1
+			item['link'] = link
+			yield Request(link, callback=self.post_parse)
 
 		print 'Added ' + str(count) + ' new posts.'
 
 	# parses a craigslist job post
 	def post_parse(self, response):
 
+# move to item pipeline
 		def getKeywords(text, limit):
 			common = open("common.txt").read().split('\n')
 			word_dict = {}
@@ -93,6 +90,7 @@ class CraigslistSpider(Spider):
 			for w in top_words:
 				top.append(w[0])
 			return top
+# end move to item pipeline
 
 		selector = Selector(response=response)
 
@@ -102,25 +100,26 @@ class CraigslistSpider(Spider):
 
 		item = CLJobPostItem()
 		item['title'] = post.xpath('h2/text()').extract()
+		item['posted'] = post.xpath('section[1]/p/time/text()').extract()
 		item['original_post_link'] = response.url
 		#item['address'] = post.xpath('section["@class=mapaddress"]/text()').extract()
-		
 		item['text'] = post.xpath('//*[@id="postingbody"]/text()').extract()
 		
+# move to item pipeline		
 		paragraphs = []
 		tokenized_text = []
+
 		for paragraph in item['text']:
 			paragraphs.append(str(paragraph.encode('ascii', 'ignore')))
 
-		print paragraphs
-		sleep(1)
+		# print paragraphs
+		# sleep(1)
 
 		for p in paragraphs:
 			tokenized_text.extend(nltk.word_tokenize(p))
 
 		item['tokenized_text'] = tokenized_text
 		item['keywords'] = getKeywords(tokenized_text, 4)
-		
-		item['posted'] = post.xpath('section[1]/p/time/text()').extract()
+# end move to pipeline
 		
 		yield item
