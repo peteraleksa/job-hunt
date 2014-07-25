@@ -2,9 +2,9 @@ import json
 import nltk
 
 with open('posts.json', 'r') as infile:
-    posts = []
-    for line in infile:
-        posts.append(json.loads(line))
+	posts = []
+	for line in infile:
+		posts.append(json.loads(line[0:len(line)-1]))
 
 for post in posts:
     print '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'
