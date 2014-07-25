@@ -20,13 +20,13 @@ class HomePageTest(TestCase):
 		expected_html = render_to_string('home.html')
 		self.assertEqual(response.content.decode(), expected_html)
 
-	def test_home_page_redirects_to_results_on_submit(self):
-		request = HttpRequest()
-		request.method = 'POST'
-		request.POST['skillset'] = 'ninja'
-		response = home_page(request)
-		expected_html = render_to_string('results.html')
-		self.assertEqual(response.content.decode(), expected_html)
+	# def test_home_page_redirects_to_results_on_submit(self):
+	# 	request = HttpRequest()
+	# 	request.method = 'POST'
+	# 	request.POST['skillset'] = 'ninja'
+	# 	response = home_page(request)
+	# 	expected_html = render_to_string('results.html')
+	# 	self.assertEqual(response.content.decode(), expected_html)
 
 	def test_results_page_can_receive_a_POST_request(self):
 		request = HttpRequest()
