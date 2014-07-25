@@ -7,7 +7,7 @@
 <body>
 	<div id="search">
 
-		<form id="skills" action="" method="post">
+		<form id="skills" method="post">
 			<input type="checkbox" name="skillset" value="android" checked>Android</input>
 			<input type="checkbox" name="skillset" value="c#" checked>C#</input>
 			<input type="checkbox" name="skillset" value="c" checked>C</input>
@@ -21,6 +21,14 @@
 		</form>
 
 	</div>
+
+	<div id="results">
+		<section id="selected_skillset">
+			{{ skillset }}
+		</section>
+
+	</div>
+
 </body>
 
 </html>

@@ -26,6 +26,7 @@ class NewVisitorTest(unittest.TestCase):
 
 		# see results with summarys
 		self.browser.implicitly_wait(3)
+		self.assertIn('Results', self.browser.title)
 
 		# change sort by to date posted
 
