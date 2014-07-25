@@ -16,10 +16,9 @@ class NewVisitorTest(unittest.TestCase):
 		self.assertIn('Job Hunt', self.browser.title)
 
 		# all skills are selected by default
-		skillset = self.browser.find_element_by_id('skillset')
-		skills = self.browser.find_elements_by_class('skill')
+		skills = self.browser.find_elements_by_name('skillset')
 		for skill in skills:
-			self.assertTrue(selenium.IsChecked(skill))
+			self.assertTrue(skill.is_selected())
 
 		# click search button
 		search_button = self.browser.find_element_by_id('search_btn')
