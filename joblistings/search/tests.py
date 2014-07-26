@@ -38,7 +38,7 @@ class HomePageTest(TestCase):
 		)
 		self.assertEqual(response.content.decode(), expected_html)
 
-class DbConnectTest(TestCase):
+class MongoDbConnectTest(TestCase):
 
 	def test_database_connection(self):
 		databaseName = 'jobHunt-dev'
