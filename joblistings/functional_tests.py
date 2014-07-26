@@ -10,7 +10,7 @@ class NewVisitorTest(unittest.TestCase):
 	def tearDown(self):
 		self.browser.quit()
 
-	def testRetriveJobListings(self):
+	def testRetrieveJobListings(self):
 		# open up the main page
 		self.browser.get('http://localhost:8000')
 		self.assertIn('Job Hunt', self.browser.title)
@@ -32,8 +32,8 @@ class NewVisitorTest(unittest.TestCase):
 		# filter by post date
 
 		# click on result link to see posts
-		result_link = self.browser.find_element_by_class('result_link')
-		result_link.click
+		#result_link = self.browser.find_element_by_class('result_link')
+		#result_link.click
 
 		# see a post
 
