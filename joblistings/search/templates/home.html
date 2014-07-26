@@ -30,6 +30,15 @@
 			{% endfor %}
 		</section>
 
+		<section id="joblinks">
+			<h3>Results: </h3>
+			{% for job in jobs %}
+				{{ job.title }}
+				{{ job.posted }}
+				{{ job.text }}
+			{% endfor %}
+		</section>
+
 	</div>
 
 </body>
