@@ -1,3 +1,9 @@
+# This is not the real decision making logic
+# The real secret sauce is hidden from this demo
+#
+# This only does a simple freq calc of the words in the post
+# and is thus essentially useless
+
 import nltk, re, pprint
 
 class PostProcessor(object):
@@ -22,3 +28,9 @@ class PostProcessor(object):
 		for w in top_words:
 			top.append(w[0])
 		return top
+
+	def extract_experience(text, limit):
+		pass
+
+	def extract_compensation(text, limit):
+		pass
