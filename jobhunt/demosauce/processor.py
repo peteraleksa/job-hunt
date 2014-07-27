@@ -34,3 +34,6 @@ class PostProcessor(object):
 
 	def extract_compensation(text, limit):
 		pass
+
+	def some_new_func():
+		pass
